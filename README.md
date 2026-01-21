@@ -67,3 +67,6 @@ Every step is designed to answer one question clearly:
 If you want a fast update, `docker-compose pull && docker-compose up -d` already exists.  
 If you want a **defensive, production-oriented update workflow**, this script is for you.
 
+## License
+
+This project is licensed under the MIT License.
