@@ -1,5 +1,15 @@
 # Nextcloud Docker Update Script
 
+## Table of Contents
+
+- [About](#nextcloud-docker-update-script)
+- [Features](#features)
+- [Why this exists](#why-this-exists)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [License](#license)
+
+
 This repository provides a hardened Bash script to safely update Nextcloud installations running in Docker or docker-compose environments.
 
 Unlike simple `docker pull && docker-compose up -d` workflows, this script focuses on **operational safety**: it detects real image changes, prevents accidental downgrades, supports dry-run execution, performs validated backups, and handles common Nextcloud maintenance and upgrade edge cases.
