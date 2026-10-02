@@ -75,7 +75,7 @@ class Updater:
         self.dbname = config.get('database', 'nextcloud')
         if not re.fullmatch(r'[A-Za-z0-9_]+', self.dbname):
             raise ValueError('Invalid database name')
-        if not 1 <= int(config.get('keep_backups', 4)) <= 52:
+        if not 1 <= int(config.get('keep_backups', 3)) <= 52:
             raise ValueError('keep_backups must be between 1 and 52')
         if self.backups == self.data or self.data in self.backups.parents:
             raise ValueError('Backup destination must be outside Nextcloud data')
@@ -251,7 +251,7 @@ class Updater:
                     owned.append(path)
             except (OSError, ValueError):
                 continue
-        for old in sorted(owned, reverse=True)[int(self.c.get('keep_backups', 4)):]:
+        for old in sorted(owned, reverse=True)[int(self.c.get('keep_backups', 3)):]:
             shutil.rmtree(old)
 
     def check_updates(self):
@@ -340,7 +340,7 @@ def main():
     if args.dry_run:
         print(json.dumps(dict(mode='weekly' if args.weekly else 'update' if args.update else 'backup' if args.backup_only else 'check',
                               status=updater.status(), backup_dir=str(updater.backups),
-                              keep_backups=updater.c.get('keep_backups', 4), target=args.target_image), indent=2))
+                              keep_backups=updater.c.get('keep_backups', 3), target=args.target_image), indent=2))
         return 0
     updater.state.mkdir(parents=True, exist_ok=True, mode=0o700)
     with (updater.state / 'run.lock').open('w') as lock:

@@ -17,7 +17,7 @@ Maintenance is enabled, configured workers are stopped, then the app is stopped 
 
 A backup becomes `backup-<UTC timestamp>-<id>` only after archive traversal, SQL validation, a full SQL import into an isolated temporary MariaDB container, and hash generation have succeeded. The test container has no network or published ports, uses a 1 GiB RAM-backed database, and is removed afterward. Larger databases may exceed this test limit and fail safely. Failed `.partial-*` directories remain for diagnosis and are never accepted as completed backups.
 
-Archives are uncompressed for predictable performance on a Pi. Expect approximately the full size of the Nextcloud directory per backup. The default keeps four completed backups; old backups are removed **only after** a new backup succeeds and the application resumes. If there is insufficient room for another full backup, the run fails without deleting old backups. Unknown directories, partial backups, symlinks, and backups belonging to another source are never pruned. Failed partial backups may need manual cleanup after inspection.
+Archives are uncompressed for predictable performance on a Pi. Expect approximately the full size of the Nextcloud directory per backup. The default keeps three completed backups; old backups are removed **only after** a new backup succeeds and the application resumes. If there is insufficient room for another full backup, the run fails without deleting old backups. Unknown directories, partial backups, symlinks, and backups belonging to another source are never pruned. Failed partial backups may need manual cleanup after inspection.
 
 The USB mount and optionally its UUID are checked before writes. A process lock prevents overlapping runs. There are no database passwords in the updater config: they are read inside the database container from its root-password environment variable. `*_FILE` secret variants are not currently supported. Backup files contain secrets and user data and are owner-only; they are not encrypted at rest.
 
@@ -45,7 +45,7 @@ Edit `/etc/nextcloud-updater.json` for your installation. Paths in the example d
 | `worker_services` | All services writing to Nextcloud files, e.g. `["cron"]` |
 | `database` | `nextcloud` |
 | `deployment_files` | Relative files next to Compose, including `.env` and `Caddyfile` |
-| `keep_backups` | `4` |
+| `keep_backups` | `3` |
 | `check_services` | `["redis", "proxy"]`; app and DB are always checked |
 | `pull_timeout`, `startup_timeout` | Bounded waits, in seconds |
 

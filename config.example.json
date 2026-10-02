@@ -10,7 +10,7 @@
   "database": "nextcloud",
   "deployment_files": [".env", "Caddyfile"],
   "check_services": ["redis", "proxy"],
-  "keep_backups": 4,
+  "keep_backups": 3,
   "pull_timeout": 1800,
   "startup_timeout": 600
 }
