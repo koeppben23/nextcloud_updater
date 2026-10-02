@@ -1,0 +1,15 @@
+[Unit]
+Description=Verified full Nextcloud backup and update check
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+RequiresMountsFor=/srv/fuchscloud-disk
+
+[Service]
+Type=oneshot
+UMask=0077
+ExecStart=/opt/nextcloud-updater/nextcloud_update.sh --weekly
+TimeoutStartSec=infinity
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7

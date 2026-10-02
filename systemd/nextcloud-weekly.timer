@@ -1,0 +1,10 @@
+[Unit]
+Description=Weekly full Nextcloud backup on Sunday at 03:00 Europe/Berlin
+
+[Timer]
+OnCalendar=Sun *-*-* 03:00:00 Europe/Berlin
+Persistent=true
+Unit=nextcloud-weekly.service
+
+[Install]
+WantedBy=timers.target

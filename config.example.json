@@ -1,0 +1,16 @@
+{
+  "compose_file": "/opt/fuchscloud/compose.yaml",
+  "nextcloud_root": "/srv/fuchscloud-disk/live/html",
+  "backup_dir": "/srv/fuchscloud-disk/full-backups",
+  "state_dir": "/var/lib/nextcloud-updater",
+  "required_mount": "/srv/fuchscloud-disk",
+  "app_service": "app",
+  "db_service": "db",
+  "worker_services": ["cron"],
+  "database": "nextcloud",
+  "deployment_files": [".env", "Caddyfile"],
+  "check_services": ["redis", "proxy"],
+  "keep_backups": 4,
+  "pull_timeout": 1800,
+  "startup_timeout": 600
+}
